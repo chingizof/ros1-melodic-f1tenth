@@ -99,8 +99,7 @@ RUN apt update && apt install -y \
     screen \
     tmux \
     iputils-ping \
-    feh \
-    tilix 
+    feh 
 
 # Install Python packages
 RUN pip install -U pip
