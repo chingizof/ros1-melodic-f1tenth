@@ -24,6 +24,11 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | a
 # Add the ROS repository
 RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros-latest.list
     
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-setuptools 
+
 # Set up ROS
 RUN apt-get update && apt-get install -y \
     python-rosdep \
@@ -102,11 +107,10 @@ RUN apt update && apt install -y \
     feh 
 
 # Install Python packages
-RUN pip install -U pip
+RUN pip install --upgrade pip
 RUN pip install transforms3d \
     imutils \
-    opencv-contrib-python \
-    matplotlib 
+    opencv-python
 
 # Kill the bell!
 RUN echo "set bell-style none" >> /etc/inputrc
