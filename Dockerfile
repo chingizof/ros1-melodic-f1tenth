@@ -38,7 +38,6 @@ RUN apt-get update && \
         ros-${ROS_DISTRO}-desktop-full \
         ros-${ROS_DISTRO}-tf2-geometry-msgs \
         ros-${ROS_DISTRO}-ackermann-msgs \
-        ros-${ROS_DISTRO}-tf-transformations \
         ros-${ROS_DISTRO}-navigation \
         ros-${ROS_DISTRO}-xacro \
         ros-${ROS_DISTRO}-joy \
