@@ -7,6 +7,17 @@ RUN apt-get update && apt-get upgrade -y
 ENV ROS_DISTRO melodic
 ARG DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+		curl \
+		wget \
+		gnupg2 \
+		lsb-release \
+		ca-certificates \
+        console-setup \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
 # Add the ROS GPG key
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
@@ -97,7 +108,7 @@ RUN pip install -U pip
 RUN pip install transforms3d \
     imutils \
     opencv-contrib-python \
-    matplotlib \
+    matplotlib 
 
 # Kill the bell!
 RUN echo "set bell-style none" >> /etc/inputrc
