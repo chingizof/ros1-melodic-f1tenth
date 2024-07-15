@@ -107,7 +107,7 @@ COPY ./entrypoint.sh /usr/bin/entrypoint.sh
 COPY ./xstartup.sh /usr/bin/xstartup.sh
 
 # Copy your existing workspace into the Docker container
-COPY ./f1tenth_ws /home/racecar/f1tenth_ws
+COPY ./../f1tenth_ws /home/racecar/f1tenth_ws
 
 # Source the ROS setup.bash file and build the workspace
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash; cd /home/racecar/f1tenth_ws; catkin_make"
