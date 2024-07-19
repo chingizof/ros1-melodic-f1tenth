@@ -123,16 +123,17 @@ RUN apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-driver-base 
 
 # add Realsense2 SDK, register server public key
-RUN sudo apt-get dist-upgrade; 
+RUN sudo apt-get -y --no-install-recommends  dist-upgrade; 
 
 # Install the core packages required to build librealsense
-RUN sudo apt-get install libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
+RUN sudo apt-get install -y --no-install-recommends \
+    libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
 
 # install build tools
-RUN sudo apt-get install git wget cmake build-essential
+RUN sudo apt-get install -y --no-install-recommends  git wget cmake build-essential
 
 #install 
-RUN sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at
+RUN sudo apt-get install -y --no-install-recommends  libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at
 
 #Clone/Download the latest stable version of librealsense2 
 RUN git clone https://github.com/IntelRealSense/librealsense.git
