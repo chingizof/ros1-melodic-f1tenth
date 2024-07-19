@@ -123,19 +123,31 @@ RUN apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-driver-base 
 
 # add Realsense2 SDK, register server public key
-#RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+RUN sudo apt-get dist-upgrade; 
 
-#Add the server to the list of repositories
-#RUN sudo apt install software-properties-common \
-#    sudo apt update \
-#    sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
+# Install the core packages required to build librealsense
+RUN sudo apt-get install libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
 
-#install the SDK
-#RUN sudo apt-get install librealsense2-utils \
-#    sudo apt-get install librealsense2-dev
+# install build tools
+RUN sudo apt-get install git wget cmake build-essential
 
-#compile SDK
-#RUN g++ -std=c++11 filename.cpp -lrealsense2
+#install 
+RUN sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at
+
+#Clone/Download the latest stable version of librealsense2 
+RUN git clone https://github.com/IntelRealSense/librealsense.git
+
+#Run Intel Realsense permissions script from librealsense2 root directory
+RUN sh ./scripts/setup_udev_rules.sh
+
+#Build and apply patched kernel modules for UBUNTU 18
+RUN sh ./scripts/patch-realsense-ubuntu-lts.sh
+
+# Build SDK
+RUN cd librealsense && mkdir build && cd build; cmake ../ ; sudo make uninstall && make clean && make && sudo make install; cd ~/home/sdc
+
+
+
 
 # Copy your existing workspace into the Docker container
 COPY ./f1tenth_ws /home/sdc/sandbox/f1tenth_ws
