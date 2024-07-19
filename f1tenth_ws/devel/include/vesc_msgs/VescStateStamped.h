@@ -1,0 +1,1 @@
+/home/sdc/sandbox/f1tenth_ws/devel/.private/vesc_msgs/include/vesc_msgs/VescStateStamped.h

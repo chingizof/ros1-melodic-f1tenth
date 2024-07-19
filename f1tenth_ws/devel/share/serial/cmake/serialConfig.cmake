@@ -1,0 +1,1 @@
+/home/sdc/sandbox/f1tenth_ws/devel/.private/serial/share/serial/cmake/serialConfig.cmake

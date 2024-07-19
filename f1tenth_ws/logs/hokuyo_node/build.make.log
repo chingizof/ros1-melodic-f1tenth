@@ -1,0 +1,5 @@
+[ 22%] Built target libhokuyo
+[ 33%] Built target hokuyo_node_gencfg
+[ 55%] Built target getFirmwareVersion
+[ 77%] Built target hokuyo_node
+[100%] Built target getID

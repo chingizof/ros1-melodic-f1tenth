@@ -1,0 +1,1 @@
+/home/sdc/sandbox/f1tenth_ws/devel/.private/auto_control/lib/pkgconfig/auto_control.pc

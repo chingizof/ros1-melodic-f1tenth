@@ -1,0 +1,1 @@
+/home/sdc/sandbox/f1tenth_ws/devel/.private/vesc_msgs/lib/pkgconfig/vesc_msgs.pc

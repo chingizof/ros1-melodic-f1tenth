@@ -23,11 +23,13 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | a
 
 # Add the ROS repository
 RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros-latest.list
-    
+
+# install Python 3    
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
-    python3-setuptools 
+    python3-setuptools \
+    python3-dev 
 
 # Set up ROS
 RUN apt-get update && apt-get install -y \
@@ -90,8 +92,6 @@ ENV PYTHONIOENCODING=utf-8
 RUN apt update && apt install -y \
     build-essential \
     cython \
-    python-pip \
-    ros-${ROS_DISTRO}-compressed-image-transport \
     libfreetype6-dev
 
 # Install some cool programs
@@ -107,10 +107,9 @@ RUN apt update && apt install -y \
     feh 
 
 # Install Python packages
-RUN pip install --upgrade pip
-RUN pip install transforms3d \
-    imutils \
-    opencv-python
+RUN python3 -m pip install --upgrade pip
+RUN pip3 install transforms3d \
+    imutils
 
 # Kill the bell!
 RUN echo "set bell-style none" >> /etc/inputrc
@@ -119,11 +118,30 @@ RUN echo "set bell-style none" >> /etc/inputrc
 COPY ./entrypoint.sh /usr/bin/entrypoint.sh
 COPY ./xstartup.sh /usr/bin/xstartup.sh
 
+# add required packages
+RUN apt-get install -y --no-install-recommends \
+    ros-${ROS_DISTRO}-driver-base 
+
+# add Realsense2 SDK, register server public key
+#RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+
+#Add the server to the list of repositories
+#RUN sudo apt install software-properties-common \
+#    sudo apt update \
+#    sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
+
+#install the SDK
+#RUN sudo apt-get install librealsense2-utils \
+#    sudo apt-get install librealsense2-dev
+
+#compile SDK
+#RUN g++ -std=c++11 filename.cpp -lrealsense2
+
 # Copy your existing workspace into the Docker container
-COPY ./../f1tenth_ws /home/racecar/f1tenth_ws
+COPY ./f1tenth_ws /home/sdc/sandbox/f1tenth_ws
 
 # Source the ROS setup.bash file and build the workspace
-RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash; cd /home/racecar/f1tenth_ws; catkin_make"
+RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash; cd /home/sdc/sandbox/f1tenth_ws; catkin build"
 
 # Copy in default config files
 COPY ./config/bash.bashrc /etc/
@@ -134,11 +152,11 @@ COPY ./config/XTerm /etc/X11/app-defaults/
 COPY ./config/default.rviz /tmp/
 
 # Create a user
-RUN useradd -ms /bin/bash racecar
-RUN echo 'racecar:racecar@mit' | chpasswd
-RUN usermod -aG sudo racecar
-USER racecar
-WORKDIR /home/racecar
+RUN useradd -ms /bin/bash sdc
+RUN echo 'sdc:sdc@lehigh.edu' | chpasswd
+RUN usermod -aG sudo sdc
+USER sdc
+WORKDIR /home/sdc
 
 # Set the entrypoint
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]

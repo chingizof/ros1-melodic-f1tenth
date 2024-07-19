@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/serial_example.dir/examples/serial_example.cc.o  -o /home/sdc/sandbox/f1tenth_ws/devel/.private/serial/lib/serial/serial_example -Wl,-rpath,/home/sdc/sandbox/f1tenth_ws/devel/.private/serial/lib /home/sdc/sandbox/f1tenth_ws/devel/.private/serial/lib/libserial.so -lrt -lpthread 

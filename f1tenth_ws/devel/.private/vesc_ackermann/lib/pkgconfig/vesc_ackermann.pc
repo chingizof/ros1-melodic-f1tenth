@@ -1,0 +1,8 @@
+prefix=/home/sdc/sandbox/f1tenth_ws/devel/.private/vesc_ackermann
+
+Name: vesc_ackermann
+Description: Description of vesc_ackermann
+Version: 0.0.1
+Cflags: -I/home/sdc/sandbox/f1tenth_ws/src/f1tenth_system/vesc/vesc_ackermann/include
+Libs: -L${prefix}/lib 
+Requires: nodelet pluginlib roscpp nav_msgs std_msgs geometry_msgs tf ackermann_msgs vesc_msgs

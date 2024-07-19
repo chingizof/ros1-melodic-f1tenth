@@ -1,0 +1,1 @@
+/home/sdc/sandbox/f1tenth_ws/devel/.private/vesc_driver/lib/pkgconfig/vesc_driver.pc

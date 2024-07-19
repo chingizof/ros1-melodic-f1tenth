@@ -1,0 +1,5 @@
+auto_control
+/home/sdc/sandbox/f1tenth_ws/devel/.private/auto_control/cmake.lock /home/sdc/sandbox/f1tenth_ws/devel/./cmake.lock
+/home/sdc/sandbox/f1tenth_ws/devel/.private/auto_control/share/auto_control/cmake/auto_controlConfig.cmake /home/sdc/sandbox/f1tenth_ws/devel/share/auto_control/cmake/auto_controlConfig.cmake
+/home/sdc/sandbox/f1tenth_ws/devel/.private/auto_control/share/auto_control/cmake/auto_controlConfig-version.cmake /home/sdc/sandbox/f1tenth_ws/devel/share/auto_control/cmake/auto_controlConfig-version.cmake
+/home/sdc/sandbox/f1tenth_ws/devel/.private/auto_control/lib/pkgconfig/auto_control.pc /home/sdc/sandbox/f1tenth_ws/devel/lib/pkgconfig/auto_control.pc
