@@ -133,7 +133,8 @@ RUN sudo apt-get install -y --no-install-recommends \
 RUN sudo apt-get install -y --no-install-recommends  git wget cmake build-essential
 
 #install 
-RUN sudo apt-get install -y --no-install-recommends  libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at
+RUN sudo apt-get install -y --no-install-recommends  libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at v4l-utils
+
 
 #Clone/Download the latest stable version of librealsense2 
 RUN git clone https://github.com/IntelRealSense/librealsense.git
