@@ -139,7 +139,7 @@ RUN sudo apt-get install -y --no-install-recommends  libglfw3-dev libgl1-mesa-de
 RUN git clone https://github.com/IntelRealSense/librealsense.git
 
 #Run Intel Realsense permissions script from librealsense2 root directory
-RUN cd realsense; sh ./scripts/setup_udev_rules.sh
+RUN cd librealsense; sh ./scripts/setup_udev_rules.sh
 
 #Build and apply patched kernel modules for UBUNTU 18
 RUN sh ./scripts/patch-realsense-ubuntu-lts.sh
