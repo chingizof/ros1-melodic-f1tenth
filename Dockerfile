@@ -158,7 +158,7 @@ COPY ./f1tenth_ws /home/sdc/sandbox/f1tenth_ws
 RUN rm -rf /home/sdc/sandbox/f1tenth_ws/build/realsense2_camera && rm -rf /home/sdc/sandbox/f1tenth_ws/build/realsense2_description
 
 # Source the ROS setup.bash file and build the workspace
-RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash; cd /home/sdc/sandbox/f1tenth_ws; catkin build --skip-packages realsense2_camera"
+RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash; cd /home/sdc/sandbox/f1tenth_ws; catkin build --remove-args realsense2_camera"
 
 # Copy in default config files
 COPY ./config/bash.bashrc /etc/
