@@ -123,36 +123,39 @@ RUN apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-driver-base 
 
 # add Realsense2 SDK, register server public key
-RUN sudo apt-get -y --no-install-recommends  dist-upgrade; 
+# RUN sudo apt-get -y --no-install-recommends  dist-upgrade; 
 
 # Install the core packages required to build librealsense
-RUN sudo apt-get install -y --no-install-recommends \
-    libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
+# RUN sudo apt-get install -y --no-install-recommends \
+    # libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
 
 # install build tools
-RUN sudo apt-get install -y --no-install-recommends  git wget cmake build-essential
+# RUN sudo apt-get install -y --no-install-recommends  git wget cmake build-essential
 
 #install 
-RUN sudo apt-get install -y --no-install-recommends  libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at v4l-utils
+# RUN sudo apt-get install -y --no-install-recommends  libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at v4l-utils
 
 
 #Clone/Download the latest stable version of librealsense2 
-RUN git clone https://github.com/IntelRealSense/librealsense.git
+# RUN git clone https://github.com/IntelRealSense/librealsense.git
 
 #Run Intel Realsense permissions script from librealsense2 root directory
-RUN cd librealsense; sh ./scripts/setup_udev_rules.sh
+# RUN cd librealsense; sh ./scripts/setup_udev_rules.sh
 
 #Build and apply patched kernel modules for UBUNTU 18
-RUN cd librealsense; sh ./scripts/patch-realsense-ubuntu-lts.sh
+# RUN cd librealsense; sh ./scripts/patch-realsense-ubuntu-lts.sh
 
 # Build SDK
-RUN mkdir build && cd build; cmake ../ ; sudo make uninstall && make clean && make && sudo make install; cd ~/home/sdc
+# RUN mkdir build && cd build; cmake ../ ; sudo make uninstall && make clean && make && sudo make install; cd ~/home/sdc
 
 
 
 
 # Copy your existing workspace into the Docker container
 COPY ./f1tenth_ws /home/sdc/sandbox/f1tenth_ws
+
+#delete realsense sdk for now
+RUN cd sandbox/f1tenth_ws/build && rm -rf realsense2_camera && rm -rf realsense2_description
 
 # Source the ROS setup.bash file and build the workspace
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash; cd /home/sdc/sandbox/f1tenth_ws; catkin build"
