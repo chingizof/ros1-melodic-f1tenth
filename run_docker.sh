@@ -10,7 +10,7 @@ docker run -it --rm --name racecar --privileged \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --network=host \
     --device=/dev/ttyUSB0 \
-    ros1-melodic-f1tenth:latest
+    ros1-melodic-racecar:latest
 
 # Disallow local connections to X server
 xhost -local:root
