@@ -155,7 +155,7 @@ RUN apt-get install -y --no-install-recommends \
 COPY ./f1tenth_ws /home/sdc/sandbox/f1tenth_ws
 
 #delete realsense sdk for now
-RUN cd sandbox/f1tenth_ws/build && rm -rf realsense2_camera && rm -rf realsense2_description
+RUN rm -rf /home/sdc/sandbox/f1tenth_ws/build/realsense2_camera && rm -rf /home/sdc/sandbox/f1tenth_ws/build/realsense2_description
 
 # Source the ROS setup.bash file and build the workspace
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash; cd /home/sdc/sandbox/f1tenth_ws; catkin build"
