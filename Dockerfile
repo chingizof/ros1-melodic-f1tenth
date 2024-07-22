@@ -116,7 +116,10 @@ RUN echo "set bell-style none" >> /etc/inputrc
 
 # Copy in the entrypoint
 COPY ./entrypoint.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
+
 COPY ./xstartup.sh /usr/bin/xstartup.sh
+RUN chmod +x /usr/bin/xstartup.sh
 
 # add required packages
 RUN apt-get install -y --no-install-recommends \
@@ -153,6 +156,11 @@ RUN apt-get install -y --no-install-recommends \
 
 # Copy your existing workspace into the Docker container
 COPY ./f1tenth_ws /home/sdc/sandbox/f1tenth_ws
+
+# Place CATKIN_IGNORE files in the realsense2 package directories to exclude them from the build
+RUN touch /home/sdc/sandbox/f1tenth_ws/build/realsense2_camera/CATKIN_IGNORE \
+           /home/sdc/sandbox/f1tenth_ws/build/realsense2_description/CATKIN_IGNORE \
+           /home/sdc/sandbox/f1tenth_ws/src/realsense-ros/CATKIN_IGNORE
 
 #delete realsense sdk for now
 RUN rm -rf /home/sdc/sandbox/f1tenth_ws/build/realsense2_camera && rm -rf /home/sdc/sandbox/f1tenth_ws/build/realsense2_description && rm -rf /home/sdc/sandbox/f1tenth_ws/src/realsense-ros
