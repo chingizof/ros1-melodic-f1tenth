@@ -180,6 +180,11 @@ COPY ./config/default.rviz /tmp/
 RUN useradd -ms /bin/bash sdc
 RUN echo 'sdc:sdc@lehigh.edu' | chpasswd
 RUN usermod -aG sudo sdc
+
+# Set permissions for /home/sdc directory
+RUN chown -R sdc:sdc /home/sdc
+RUN chmod -R 755 /home/sdc
+
 USER sdc
 WORKDIR /home/sdc
 
