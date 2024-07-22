@@ -143,7 +143,7 @@ RUN git clone https://github.com/IntelRealSense/librealsense.git
 RUN cd librealsense; sh ./scripts/setup_udev_rules.sh
 
 #Build and apply patched kernel modules for UBUNTU 18
-RUN cd scripts; sh ./scripts/patch-realsense-ubuntu-lts.sh
+RUN cd scripts; sh patch-realsense-ubuntu-lts.sh; cd ..; cd ..
 
 # Build SDK
 RUN mkdir build && cd build; cmake ../ ; sudo make uninstall && make clean && make && sudo make install; cd ~/home/sdc
